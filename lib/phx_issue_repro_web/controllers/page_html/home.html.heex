@@ -1,0 +1,35 @@
+<Layouts.flash_group flash={@flash} />
+
+<main style="font:14px/1.6 ui-monospace,Menlo,Consolas,monospace; max-width:720px; margin:48px auto; padding:0 24px; color:#1a1a1a;">
+  <h1 style="font-size:28px; margin:0 0 8px 0; font-weight:600;">phx-issue-repro</h1>
+  <p style="color:#666; margin:0 0 32px 0;">
+    A reusable Phoenix scaffold for reproducing upstream library bugs.
+    Each bug lives on its own branch.
+  </p>
+
+  <h2 style="font-size:16px; margin:32px 0 12px 0; font-weight:600;">How it works</h2>
+  <p>
+    <code>main</code> is the bare Phoenix + LiveView scaffold (no Ecto, no
+    Mailer, no Tailwind, no Gettext). Each bug report has a dedicated branch
+    that adds whatever deps the bug needs and a branch-level README explaining
+    the symptom, reproduction steps, and the upstream link.
+  </p>
+
+  <h2 style="font-size:16px; margin:32px 0 12px 0; font-weight:600;">Available branches</h2>
+  <ul style="padding-left:20px; margin:0;">
+    <li>
+      <code>repro/live_vue_mounted_race</code> — live_vue's <code>mounted()</code>
+      hook awaits the component import before setting <code>this.vue</code>; a
+      LiveView patch arriving during that window throws against undefined
+      <code>this.vue</code>. See branch README for steps.
+    </li>
+  </ul>
+
+  <h2 style="font-size:16px; margin:32px 0 12px 0; font-weight:600;">To use this template for a new bug</h2>
+  <pre style="background:#f6f8fa; padding:12px; border-radius:6px; overflow-x:auto;">
+git checkout -b repro/&lt;short-slug&gt; main
+# add the deps you need, the minimal code that triggers the bug,
+# and a branch-level README.md explaining how to reproduce.
+git commit -am "repro: &lt;bug summary&gt;"
+git push -u origin repro/&lt;short-slug&gt;</pre>
+</main>
