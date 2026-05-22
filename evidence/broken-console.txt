@@ -1,0 +1,18 @@
+[pageerror] Cannot read properties of undefined (reading 'props')
+TypeError: Cannot read properties of undefined (reading 'props')
+    at _ViewHook.updated (http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/live___vue.js?v=9bb3ffe1:941:77)
+    at _ViewHook.__updated (http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:2967:8)
+    at http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:3415:18
+    at http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:1742:56
+    at Array.forEach (<anonymous>)
+    at DOMPatch.trackAfter (http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:1742:34)
+    at http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:1983:32
+    at Array.forEach (<anonymous>)
+    at DOMPatch.perform (http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:1983:11)
+    at _View.performPatch (http://localhost:5173/@fs/home/user/<user>/phx-issue-repro/node_modules/.vite/deps/phoenix___live___view.js?v=9bb3ffe1:3422:9)
+[warning] [Vue warn]: Hydration text content mismatch on JSHandle@node 
+  - rendered on server: tick: 0
+  - expected on client: tick: 1 
+  at <Hello tick=1 > 
+  at <App>
+[error] Hydration completed but contains mismatches.
