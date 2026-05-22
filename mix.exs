@@ -40,17 +40,22 @@ defmodule PhxIssueRepro.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:quickbeam, "~> 0.8"},
       {:phoenix, "~> 1.8.7"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.1.0"},
       {:lazy_html, ">= 0.1.0", only: :test},
-      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      # Bug-repro deps. live_vue's igniter sets up phoenix_vite +
+      # the Vue asset pipeline. Pinned to a version matching the
+      # state of the upstream repo at PR-filing time.
+      {:live_vue, "~> 1.0"},
+      {:igniter, "~> 0.6", only: [:dev]}
     ]
   end
 
@@ -63,11 +68,13 @@ defmodule PhxIssueRepro.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
-      "assets.setup": ["esbuild.install --if-missing"],
-      "assets.build": ["compile", "esbuild phx_issue_repro"],
+      "assets.setup": ["phoenix_vite.npm assets install"],
+      "assets.build": [
+        "phoenix_vite.npm vite build --manifest --ssrManifest --emptyOutDir true",
+        "phoenix_vite.npm vite build --emptyOutDir false --ssr js/server.js --outDir ../priv/static"
+      ],
       "assets.deploy": [
-        "esbuild phx_issue_repro --minify",
-        "phx.digest"
+        "assets.build"
       ],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
     ]

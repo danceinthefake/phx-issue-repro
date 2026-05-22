@@ -1,4 +1,5 @@
 import Config
+config :live_vue, vite_host: "http://localhost:5173", ssr_module: LiveVue.SSR.ViteJS
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -14,9 +15,8 @@ config :phx_issue_repro, PhxIssueReproWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "SsjVQlavtg777/1v9zRjrfiwY0/9bys6CqDdx2iaiRj5krcqP7tR1AO8U6H2d/yQ",
-  watchers: [
-    esbuild: {Esbuild, :install_and_run, [:phx_issue_repro, ~w(--sourcemap=inline --watch)]}
-  ]
+  watchers: [vite: {PhoenixVite.Npm, :run, [:vite, ~w(dev)]}],
+  static_url: [host: "localhost", port: 5173]
 
 # ## SSL Support
 #

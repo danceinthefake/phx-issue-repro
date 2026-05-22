@@ -17,6 +17,12 @@ defmodule PhxIssueReproWeb.Router do
   scope "/", PhxIssueReproWeb do
     pipe_through :browser
 
+    # Race repro: this LiveView mounts a Vue island and immediately
+    # schedules a prop update that fires LiveView's `updated()`
+    # hook while live_vue's async `mounted()` is still awaiting
+    # its component import. See the branch README.
+    live "/race", RaceLive
+
     get "/", PageController, :home
   end
 

@@ -7,6 +7,16 @@
 # General application configuration
 import Config
 
+config :live_vue, ssr: true, shared_props: []
+
+config :phoenix_vite, PhoenixVite.Npm,
+  assets: [args: [], cd: __DIR__],
+  vite: [
+    args: ~w(exec -- vite),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"MIX_BUILD_PATH" => Mix.Project.build_path()}
+  ]
+
 config :phx_issue_repro,
   generators: [timestamp_type: :utc_datetime]
 
@@ -20,16 +30,6 @@ config :phx_issue_repro, PhxIssueReproWeb.Endpoint,
   ],
   pubsub_server: PhxIssueRepro.PubSub,
   live_view: [signing_salt: "zcUIjUX5"]
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.25.4",
-  phx_issue_repro: [
-    args:
-      ~w(js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/* --alias:@=.),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => [Path.expand("../deps", __DIR__), Mix.Project.build_path()]}
-  ]
 
 # Configure Elixir's Logger
 config :logger, :default_formatter,

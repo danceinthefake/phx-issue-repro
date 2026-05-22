@@ -81,6 +81,10 @@ defmodule PhxIssueReproWeb do
       import Phoenix.HTML
       # Core UI components
       import PhxIssueReproWeb.CoreComponents
+      # live_vue: makes `<.vue v-component="Foo" />` available in HEEx.
+      # Added by the repro/live_vue_mounted_race branch; not present
+      # on `main`.
+      import LiveVue, only: [vue: 1]
 
       # Common modules used in templates
       alias Phoenix.LiveView.JS
